@@ -39,8 +39,8 @@ Run the Vite development server in another:
 
 ```sh
 cd frontend
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 Open `http://localhost:5173`. Vite proxies HTTP and WebSocket traffic to FastAPI.
@@ -49,7 +49,7 @@ Build the single-deployment frontend:
 
 ```sh
 cd frontend
-npm run build
+bun run build
 cd ..
 uv run agent-hub-api
 ```
@@ -58,9 +58,9 @@ Frontend verification:
 
 ```sh
 cd frontend
-npm test
-npm run typecheck
-npm run test:e2e
+bun run test
+bun run typecheck
+bun run test:e2e
 ```
 
 The browser interface supports agent switching, independent per-agent sessions,
