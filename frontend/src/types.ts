@@ -74,6 +74,7 @@ export interface Attachment {
   contentType?: string;
   contentUrl?: string;
   name?: string;
+  size?: number;
   content?: Record<string, unknown>;
   [key: string]: unknown;
 }

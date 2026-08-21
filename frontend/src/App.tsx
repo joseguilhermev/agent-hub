@@ -177,11 +177,18 @@ function Hub({ user, onLogout, onAdmin }: { user: User; onLogout: () => void; on
 
   const send = useCallback(async (text: string, files: File[]) => {
     if (!activeId || !activeSession) return false;
-    const optimistic = text ? localMessage({ type: "message", text, timestamp: new Date().toISOString() }, "user") : undefined;
-    if (optimistic) {
-      optimistic.status = "sending";
-      setSessions((current) => ({ ...current, [activeId]: { ...current[activeId], messages: [...current[activeId].messages, optimistic] } }));
-    }
+    const optimistic = localMessage({
+      type: "message",
+      text: text || undefined,
+      timestamp: new Date().toISOString(),
+      attachments: files.map((file) => ({
+        contentType: file.type || "application/octet-stream",
+        name: file.name,
+        size: file.size,
+      })),
+    }, "user");
+    optimistic.status = "sending";
+    setSessions((current) => ({ ...current, [activeId]: { ...current[activeId], messages: [...current[activeId].messages, optimistic] } }));
     setSending(true);
     setError(undefined);
     try {
@@ -206,15 +213,11 @@ function Hub({ user, onLogout, onAdmin }: { user: User; onLogout: () => void; on
         }));
         response = await sendTo(conversation.id);
       }
-      if (optimistic) {
-        setSessions((current) => ({ ...current, [activeId]: { ...current[activeId], messages: current[activeId].messages.map((message) => message.localId === optimistic.localId ? { ...message, status: "sent" } : message) } }));
-      }
+      setSessions((current) => ({ ...current, [activeId]: { ...current[activeId], messages: current[activeId].messages.map((message) => message.localId === optimistic.localId ? { ...message, status: "sent" } : message) } }));
       addActivities(activeId, response.messages);
       return true;
     } catch (reason) {
-      if (optimistic) {
-        setSessions((current) => ({ ...current, [activeId]: { ...current[activeId], messages: current[activeId].messages.map((message) => message.localId === optimistic.localId ? { ...message, status: "failed" } : message) } }));
-      }
+      setSessions((current) => ({ ...current, [activeId]: { ...current[activeId], messages: current[activeId].messages.map((message) => message.localId === optimistic.localId ? { ...message, status: "failed" } : message) } }));
       setError(reason instanceof Error ? reason.message : "Não foi possível enviar a mensagem.");
       return false;
     } finally {

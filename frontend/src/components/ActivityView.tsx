@@ -57,6 +57,13 @@ function safeUrl(url?: string): string | undefined {
   }
 }
 
+function formatFileSize(size?: number): string | undefined {
+  if (size === undefined) return;
+  if (size < 1024) return `${size} B`;
+  if (size < 1024 * 1024) return `${Math.round(size / 1024)} KB`;
+  return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 function CardAttachment({ attachment, onActivity }: { attachment: Attachment; onActivity: Props["onActivity"] }) {
   const contentType = attachment.contentType ?? "";
   const content = attachment.content ?? {};
@@ -123,7 +130,7 @@ function CardAttachment({ attachment, onActivity }: { attachment: Attachment; on
   if (url) {
     return <a className="file-attachment" href={url} target="_blank" rel="noreferrer"><File size={21} /><span>{attachment.name ?? "Baixar anexo"}</span><ArrowSquareOut size={16} /></a>;
   }
-  return <div className="file-attachment"><File size={21} /><span>{attachment.name ?? contentType ?? "Anexo"}</span></div>;
+  return <div className="file-attachment"><File size={21} /><span>{attachment.name ?? contentType ?? "Anexo"}{attachment.size !== undefined && <small>{formatFileSize(attachment.size)}</small>}</span></div>;
 }
 
 export function ActivityView({ activity, agentName, onTextAction, onActivity, onStreamingComplete }: Props) {

@@ -100,6 +100,28 @@ describe("App", () => {
     expect(api.endConversation).toHaveBeenCalledWith("first");
   });
 
+  it("keeps uploaded files with the sent user message", async () => {
+    vi.mocked(api.agents).mockResolvedValue([{ id: "support", name: "Support" }]);
+    vi.mocked(api.createConversation).mockResolvedValue({
+      id: "conversation",
+      agent: { id: "support", name: "Support" },
+      messages: [],
+    });
+    vi.mocked(api.upload).mockResolvedValue({ messages: [] });
+
+    const { container } = render(<App />);
+    fireEvent.click((await screen.findByText("Support")).closest("button")!);
+    await screen.findByLabelText("Mensagem para Support");
+    const file = new File(["quarterly results"], "report.pdf", { type: "application/pdf" });
+    fireEvent.change(container.querySelector('input[type="file"]')!, { target: { files: [file] } });
+    fireEvent.click(screen.getByRole("button", { name: "Enviar mensagem" }));
+
+    await waitFor(() => expect(api.upload).toHaveBeenCalledWith("conversation", [file], undefined));
+    expect(screen.getByText("report.pdf")).toBeInTheDocument();
+    expect(screen.getByText("17 B")).toBeInTheDocument();
+    expect(screen.getByText("Você")).toBeInTheDocument();
+  });
+
   it("lets a user request a new agent", async () => {
     vi.mocked(api.agents).mockResolvedValue([]);
     vi.mocked(api.requestAgent).mockResolvedValue({
