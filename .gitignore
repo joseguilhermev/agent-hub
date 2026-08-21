@@ -1,0 +1,27 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.env
+data/
+
+# Frontend-generated files
+frontend/node_modules/
+frontend/test-results/
+frontend/playwright-report/
+
+# Agent files
+agents.md
+skills-lock.json
+.agents
+docs
+
+frontend/*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts
