@@ -219,14 +219,7 @@ body { background: var(--canvas); }
 .agent-rail { color: #f2f1eb; border-right: 0; background: var(--rail); box-shadow: 18px 0 60px rgba(41, 43, 36, .08); }
 .rail-brand { height: 104px; padding: 0 27px; border-color: rgba(255,255,255,.09); font-family: inherit; }
 .brand-lockup { display: flex; align-items: center; gap: 13px; }
-.brand-lockup > span:last-child { display: grid; gap: 1px; }
-.brand-lockup strong { font-family: "Instrument Serif", Georgia, serif; font-size: 25px; font-weight: 400; letter-spacing: -.02em; line-height: 1; }
-.brand-lockup small { color: var(--rail-muted); font-size: 9px; font-weight: 650; letter-spacing: .16em; text-transform: uppercase; }
-.brand-mark { position: relative; width: 32px; height: 32px; display: block; transform: rotate(-8deg); }
-.brand-mark i { position: absolute; display: block; width: 12px; height: 12px; border-radius: 4px 4px 4px 1px; background: #dce8cb; }
-.brand-mark i:nth-child(1) { top: 1px; left: 2px; }
-.brand-mark i:nth-child(2) { top: 3px; right: 2px; opacity: .56; }
-.brand-mark i:nth-child(3) { bottom: 2px; left: 10px; opacity: .78; }
+.brand-lockup img { display: block; width: 188px; height: auto; }
 .rail-content { padding: 38px 14px 24px; }
 .rail-heading { display: flex; align-items: center; justify-content: space-between; margin: 0 13px 18px; }
 .rail-heading .rail-label { margin: 0; color: var(--rail-muted); font-size: 10px; letter-spacing: .15em; }
@@ -285,9 +278,7 @@ body { background: var(--canvas); }
   .agent-rail { background: var(--rail); color: #fff; }
   .agent-rail::before { background: #656b61; }
   .rail-brand { border-color: rgba(255,255,255,.09); }
-  .brand-lockup strong { font-size: 0; }
-  .brand-lockup strong::after { content: "Escolha um agente"; font-size: 27px; }
-  .brand-lockup small, .brand-mark { display: none; }
+  .brand-lockup img { width: 166px; }
   .rail-brand span::after { content: none; }
   .rail-close { color: #fff; }
   .empty-state { width: min(100% - 44px, 620px); padding: 30px 0; }
@@ -527,12 +518,7 @@ body { background: var(--background); }
 .app-shell { grid-template-columns: 292px 1fr; background: var(--background); }
 .agent-rail { color: var(--text-primary); border-right: 1px solid var(--border); background: var(--surface); box-shadow: none; }
 .rail-brand { height: 88px; padding-inline: 24px; border-color: var(--border); }
-.brand-mark { width: 30px; height: 30px; transform: rotate(-8deg); }
-.brand-mark i { background: var(--brand-primary); }
-.brand-mark i:nth-child(2) { opacity: .68; }
-.brand-mark i:nth-child(3) { opacity: .84; }
-.brand-lockup strong { color: var(--brand-primary); font-family: inherit; font-size: 19px; font-weight: 680; letter-spacing: -.025em; }
-.brand-lockup small { color: var(--text-muted); }
+.brand-lockup img { width: 196px; }
 .rail-content { padding: 30px 14px 22px; }
 .rail-heading .rail-label { color: var(--text-muted); }
 .rail-heading > span { color: var(--text-muted); }
@@ -626,7 +612,6 @@ body { background: var(--background); }
   .agent-rail { color: var(--text-primary); background: var(--surface); box-shadow: 0 -18px 48px rgba(56, 32, 90, .14); }
   .agent-rail::before { background: var(--brand-warm-gray); }
   .rail-brand { border-color: var(--border); }
-  .brand-lockup strong::after { color: var(--text-primary); }
   .rail-close { color: var(--brand-primary); }
   .sheet-scrim { background: rgba(36, 36, 36, .34); }
   .empty-state h1 { font-size: clamp(42px, 13vw, 58px); }

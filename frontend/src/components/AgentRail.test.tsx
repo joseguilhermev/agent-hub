@@ -11,6 +11,7 @@ describe("AgentRail", () => {
   it("lists agents and selects one", () => {
     const onSelect = vi.fn();
     render(<AgentRail agents={agents} activeId="support" mobileOpen={false} onClose={() => undefined} onSelect={onSelect} onNew={() => undefined} onRequest={() => undefined} />);
+    expect(screen.getByRole("img", { name: "Grant Thornton" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /sales/i }));
     expect(onSelect).toHaveBeenCalledWith(agents[1]);
     expect(screen.getByLabelText("Selecionado")).toBeInTheDocument();

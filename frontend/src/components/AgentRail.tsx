@@ -1,4 +1,5 @@
 import { ChatCircle, Check, Plus, Sparkle, X } from "@phosphor-icons/react";
+import grantThorntonLogo from "../assets/grant-thornton-logo.png";
 import type { Agent } from "../types";
 
 interface Props {
@@ -45,8 +46,7 @@ export function AgentRail({ agents, activeId, mobileOpen, onClose, onSelect, onN
       <aside className={`agent-rail ${mobileOpen ? "is-open" : ""}`} aria-label="Agentes">
         <div className="rail-brand">
           <div className="brand-lockup">
-            <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
-            <span><strong>Agent Hub</strong><small>workspace</small></span>
+            <img src={grantThorntonLogo} alt="Grant Thornton" />
           </div>
           <button className="icon-button rail-close" onClick={onClose} aria-label="Fechar menu de agentes">
             <X size={22} />
