@@ -25,7 +25,7 @@ export function AdaptiveCardView({ card, onAction }: Props) {
       spacing: { small: 8, default: 12, medium: 16, large: 22, extraLarge: 28, padding: 18 },
       containerStyles: {
         default: { backgroundColor: "#ffffff", foregroundColors: {} },
-        emphasis: { backgroundColor: "#f7f6f3", foregroundColors: {} },
+        emphasis: { backgroundColor: "#f2edf7", foregroundColors: {} },
       },
       actions: { actionsOrientation: 0, actionAlignment: 0, buttonSpacing: 8 },
     });

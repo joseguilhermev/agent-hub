@@ -248,8 +248,9 @@ function Hub({ user, onLogout, onAdmin }: { user: User; onLogout: () => void; on
 
   return (
     <main className="app-shell">
+      <a className="skip-link" href="#main-workspace">Pular para a conversa</a>
       <AgentRail agents={agents} activeId={activeId} mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} onSelect={(agent) => void selectAgent(agent)} onNew={() => void newConversation()} onRequest={() => { setMobileOpen(false); setRequestOpen(true); }} />
-      <section className="workspace">
+      <section className="workspace" id="main-workspace">
         <header className="workspace-header">
           <button className="icon-button mobile-menu" onClick={() => setMobileOpen(true)} aria-label="Escolher um agente"><List size={24} /></button>
           {activeAgent ? <><span className="header-avatar">{activeAgent.name.slice(0, 1).toUpperCase()}</span><div><h1>{activeAgent.name}</h1><p><span className="status-dot" /> Disponível</p></div></> : <div><h1>Agent Hub</h1><p>{loadingAgents ? "Carregando agentes" : "Seu espaço de especialistas"}</p></div>}

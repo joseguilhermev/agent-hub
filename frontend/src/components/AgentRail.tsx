@@ -44,13 +44,16 @@ export function AgentRail({ agents, activeId, mobileOpen, onClose, onSelect, onN
       />
       <aside className={`agent-rail ${mobileOpen ? "is-open" : ""}`} aria-label="Agentes">
         <div className="rail-brand">
-          <span>Agent Hub</span>
+          <div className="brand-lockup">
+            <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
+            <span><strong>Agent Hub</strong><small>workspace</small></span>
+          </div>
           <button className="icon-button rail-close" onClick={onClose} aria-label="Fechar menu de agentes">
             <X size={22} />
           </button>
         </div>
         <div className="rail-content">
-          <p className="rail-label">Agentes</p>
+          <div className="rail-heading"><p className="rail-label">Seus agentes</p><span>{String(agents.length).padStart(2, "0")}</span></div>
           <div className="agent-list">
             {agents.map((agent) => (
               <AgentRow
